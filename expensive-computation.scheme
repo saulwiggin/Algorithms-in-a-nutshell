@@ -1,0 +1,7 @@
+;; TwoToTheN: number -> number
+(define (TwoToTheN n)
+	(let loop ([i n]
+		[result 1])
+	(if (= i 0)
+		result
+		(loop (sub1 i) (* 2 result)))))

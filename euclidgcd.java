@@ -1,4 +1,4 @@
-public static void gcd (int a[], int b[], int gcd[]) {
+public static void gcd(int a[], int b[], int gcd[]) {
 	if (isZero(a)) {assign (gcd, a); return;}
 	if (isZero(b)) { assign (gcd, b); return;}
 	
