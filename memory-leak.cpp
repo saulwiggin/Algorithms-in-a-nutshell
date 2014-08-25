@@ -4,7 +4,7 @@
 
 /** Return string "abcdef" as "fabcde" */
 char *cycle (char *s) {
-	int n = strlens(s);
+	int n = strlen(s);
 	char *u = malloc(n+1);
 	strncpy (u, s+1, n-1);
 	u[n-1] = s[0];
@@ -12,7 +12,7 @@ char *cycle (char *s) {
 	return u;
 	}
 	
-int main n(int argc, char **argv) {
+int main (int argc, char **argv) {
 		char *s = strdup("ThisStringHas25Characters");
 		int num=0;
 		
