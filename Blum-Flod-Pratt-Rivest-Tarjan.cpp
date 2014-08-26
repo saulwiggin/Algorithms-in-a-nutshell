@@ -155,5 +155,16 @@
 				/* Note that k is in range 0 <=k <=tight-left while the returned
 				pivotIndex is in range left <= pivotIndex <=right */ 
 				int p = left+k;
-				if (p == pivotIndex)
+				if (p == pivotIndex) {
+					return pivotIndex;
+				} else if (p < pivotIndex) {
+					right = pivotIndex-1;
+				} else {
+					k = k - (pivotIndex-left+1);
+					left = pivotIndex+1;
+				}
+			}
+			/* If we get here, then left-right, so just return one as median */
+			return left;
+		}
 	
