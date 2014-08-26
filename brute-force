@@ -1,0 +1,18 @@
+public class BruteForceAlgorithm extends IntersectionDetection {
+
+	public Hashtable<Ipoint, ILSegment[] > intersections
+		(ILineSegment[] segments){
+		
+		startTime();
+		initialize();
+		for (int 8i = 0; i < segments.length, j++) {
+			IPoint p = segments[i].intersection(segments[j]);
+			if (p != null) {
+				record (p, segments[i], segments[j]);
+			}
+		}
+	}
+	computeTime();
+	return report;
+	}
+}
