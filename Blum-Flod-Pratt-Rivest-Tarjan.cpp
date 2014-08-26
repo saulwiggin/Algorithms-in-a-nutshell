@@ -140,5 +140,20 @@
 			int selectMedian(void **ar, int(*cmp)(const void *,cponst void *),
 								int oleft, int right) {
 				int k = (right-left+1)/2;
+				while(k>0){
+				/* Choose index around which to partition. */
+				int idx = medianOfMedians(ar, cmp, left, right, 1);
+
+				/** 
+				* Partition input array aroun d the median of medians x. If kth
+				* largest is found, return absolute index; otherwise narrow to find kth smallest
+				in A[left, pivotIndex-1] or (k-p)-that* 
+				* in A[pivotIndex+1,right]
+				*/
+				int pivotIndex = partition(ar,cmp,left,right,idx);
 				
+				/* Note that k is in range 0 <=k <=tight-left while the returned
+				pivotIndex is in range left <= pivotIndex <=right */ 
+				int p = left+k;
+				if (p == pivotIndex)
 	
