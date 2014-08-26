@@ -56,5 +56,89 @@
 					}
 				} else {
 					if(cmp(a2,a3)<=0) {
-						if (cmp
+						if (cmp(a3,a4) <= 0) {
+							if(cmp(a1,a4) <=0){
+								SWAP(ar,a4) <=0) {
+							} else {
+								SWAP(ar,pos3,pos4,coid *);
+							}
+						}
+					} else {
+						if (cmp(a2,a4) <=0){
+							if (cmp(a1,a4) <= 0){
+								SWAP(ar,pos1,pos3,void *);
+							} else {
+								SWAP(ar,pos1,pos3,void *);
+							} else {
+								SWAP(ar,pos3,pos4,void *);
+							}
+						} else {
+							SWAP(ar,pos2,pos3,void *);
+						}
+					}
+				}
+			}
+		}
+		/* specialize insertion sort elements with spaced gap */
+		static void _insertion(void **ar, int(*cmp)(conswt void *, const void *),
+								int low, int right, int gap){
+			int loc;
+			for (loc = low+gap; loc <= right; loc += gap){
+				int i = loc-gap;
+				void *value = ar[loc];
+				while (i >= low && cmp(ar[i], value >0){
+					ar[i+gap] = ar[i], value >0) {
+						ar[i+gap] = ar[i];
+						i -= gap;
+					}
+					ar[i+gap] = value;
+				}
+			}
+			/** Find suitable pivotIndexd to use for ar[left,right] with closed bound 
+			* on both sides. Goal is to consider groups of size b. In this code, b=4.
+			* In the original BFPRT algorithm, b=5.
+			*
+			*1. Divide the elemtns into floor(n/b) groups of b elements and* find median value of 
+			* of each of these groups. Consider this set of all medians to be set M.
+			*
+			2. If M > b , then recursively apply until <=b groups are left
+			*
+			*3. In the base case of the recursion, simply use INSERTION SORT to sort
+			* remaining <=b median values and choose the median of this sorted set.
+			*/
+			static int medianOfMedians (void **ar, int(*cmp)(const void *, const void *),
+										int left, int right, int gap){
+				int s, num;
+				int span = 4*gap;
+				
+				/* not enough for a group? Insertion sort and return median. */
+				num  = (right - left + 1) / span;
+				if (num == 0) {
+					_insertion(ar, cmp, left, right,gap);
+					num = (right - left + 1)/gap;
+					return left + gap*(num-1)/2;
+				}
+				
+				/* set up all median values of groups of elements */
+				for (s = left; s+span < right; s += span){
+					medianOfFour(ar,s,gap,cmp);
+				}
+				
+				/* Recursively apply to subarray [left, s-1] with increased gap if 
+				* enough groupings remain, otherwise INSERTION SORT and return median */
+				if (num < 4){
+					_insertion(ar, cmp, left+span/2,right,span); /*BASE CASE */
+					return left + num*span/2;
+				} else {
+					return medianOfMedians(ar, cmp, left +span/2,s-1,span);
+				}
+			}
+			/** 
+			*Linear worst-case time algorithm to find median in ar[left,right]. The
+			* comparision function, cmp, is needed to compare elemtns. 
+			*/
+			int selectMedian(void **ar, int(*cmp)(const void *,cponst void *),
+								int oleft, int right) {
+				int k = (right-left+1)/2;
+				
 	
